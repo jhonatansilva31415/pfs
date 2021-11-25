@@ -1,0 +1,233 @@
+
+* 01 - Python for web development from scratch - 2021-2022
+=2021-11-25=
+
+* Introduction
+
+Hi, my name is Jhonatan da Silva, I've been working with software for about 6 years. I am currently a Software Engineer.
+
+* Assumptions
+
+As this is a python for web development course, somethings to keep in mind
+
+1. You have python installed;
+2. You know how to run a python script;
+3. You have an editor installed;
+   - could be vscode, (neo)vi(m), emacs, sublime, pycharm and so on;
+
+* How to run python scripts
+
+Go in your terminal and
+
+#+begin_src bash
+  python --version
+#+end_src
+
+- 2.7 deprecated
+- >= 3.6 please
+- >= 3.10 if you like to live on the edge
+
+* Hello world
+
+#+begin_src python :results output
+  print("hello world")
+#+end_src
+
+* Print
+
+*** Basic Print
+
+Whenever you want to print something to the screen
+
+#+begin_src python :results output
+  print("Heyy!!")
+#+end_src
+
+*** Using f strings
+
+#+begin_src python :results output
+  name = "Nicoly"
+  print(f"Hey {name}!!")
+#+end_src
+
+*** Why fstrings
+
+#+begin_src python :results output
+  name = "Jhon"
+  print("Hey " + name)
+#+end_src
+
+
+**** But what happens if
+
+Prevent erros like these, and also, it looks cleaner then adding or using .format
+
+#+begin_src python :results output
+  name = None
+  print("Hey " + name)
+#+end_src
+
+#+RESULTS:
+
+* Greeting with functions
+
+#+begin_src python :results output
+
+  def greet(name: str):
+      print(f"Hi {name}")
+
+  greet("Jhon")
+  greet("Nicoly")
+
+#+end_src
+
+* Numbers and Operations
+
+#+begin_src python :results output
+  n1 = 2
+  n2 = 2
+  print(f"n1+n2 : {n1+n2}")
+  print(f"n1-n2 : {n1-n2}")
+  print(f"n1/n2 : {n1/n2}")
+  print(f"n1*n2 : {n1*n2}")
+  print(f"n1**n2 : {n1**n2}")
+#+end_src
+
+* Simple Calculator
+
+#+begin_src python :results output
+  def calc(n1: float, n2: float) -> float:
+      sum_is = n1+n2
+      print(f"The sum is {sum_is}")
+
+  calc(1,2)
+  calc(2,3)
+#+end_src
+
+But what if we want to add, substract, divide and multiply?
+
+* Logic
+We create a very simple calculator that could just sum up values, what if we wanted to subtract, divide and multiply?
+** if, else
+
+We need to use conditions, in python, we can use if, else and elif
+
+#+begin_src python
+
+  if something:
+    do something
+  else:
+    do something else
+
+#+end_src
+
+** if, else if
+Or, if we want to add more conditions to it
+
+#+begin_src python
+
+  if something:
+      do something
+  elif something different:
+      do something different
+  else:
+      do something else
+
+#+end_src
+
+** Using if, elif, else to build another calculator
+#+begin_src python :results output
+
+  def calc(operation:str, n1: float, n2: float) -> float:
+      value = 0.0
+      if operation == 'add':
+          value = n1+n2
+      elif operation == 'sub':
+          value = n1-n2
+      elif operation == 'mult':
+          value = n1*n2
+      elif operation == 'div':
+          value = n1/n2
+      else:
+          value = 0.0
+
+      print(f"The {operation} is {value}")
+
+  calc('add', 1,2)
+  calc('add', 2,3)
+
+  calc('mult', 2,3)
+  calc('mult', 4,5)
+
+  calc('div', 2,3)
+  calc('div', 4,5)
+
+  calc('sub', 2,3)
+  calc('sub', 4,5)
+
+#+end_src
+
+** Using python 3.10
+
+=switch= case was introduced in python 3.10 with =match=
+
+#+begin_src python :results output
+
+  def calculator(operation:str, n1: float, n2: float) -> float:
+    match operation:
+       case "add":
+          return n1+n2
+       case "sub":
+          return n1-n2
+       case "div":
+          return n1/n2
+       case "mult":
+          return n1*n2
+
+  print(calculator('add', 2,3))
+  print(calculator('sub', 2,3))
+  print(calculator('div', 2,3))
+  print(calculator('mult', 2,3))
+#+end_src
+
+* Dictionaries & JSON
+
+#+begin_src python :results output
+
+  person = {
+      "name":"Jhon",
+      "is_dev": False
+  }
+
+  name = person["name"]
+  name = person.get("name","")
+  is_dev = person.get("is_dev",False)
+  if is_dev: print(f"{name} is a dev")
+  else: print(f"{name}, why you are not a dev?")
+
+#+end_src
+
+* A very minimalistic flask api
+
+Install flask
+#+begin_src bash
+  #pyenv activate pfs if you know how to use virtual envs, may touch in this in the future
+  pip install flask
+#+end_src
+
+A very minimalistic flask app
+#+begin_src python :results output
+
+    from flask import Flask
+
+    app = Flask(__name__)
+
+
+    @app.route('/')
+    def home():
+        return {'response':'Hello world!'}
+
+    if __name__ == '__main__':
+        app.run(port=5000)
+
+#+end_src
